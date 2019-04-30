@@ -2,6 +2,9 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Jets.Infrastructure;
+using System.Threading.Tasks;
+using System.Linq;
 
 namespace FunctionalTests
 {
@@ -11,7 +14,21 @@ namespace FunctionalTests
 
         public LookUpSeedData()
         {
-            JetsLookUps = new List<LookUpDto>()
+            
+        }
+
+        internal static async Task SeedAsync(JetsTestContext jetsContext)
+        {
+            if (!jetsContext.JetsLookUps.Any())
+            {
+                jetsContext.AddRange(GetPreconfiguredJetsLookUps());
+                await jetsContext.SaveChangesAsync();
+            }
+        }
+
+        static IEnumerable<LookUpDto> GetPreconfiguredJetsLookUps()
+        {
+            return new List<LookUpDto>()
             {
                 new LookUpDto()
                 {

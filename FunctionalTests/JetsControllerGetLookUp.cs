@@ -20,12 +20,12 @@ public class JetsControllerGetLookUp : IClassFixture<CustomWebApplicationFactory
     [Fact]
     public async Task ReturnLookUpForId()
     {
-        var response = await Client.GetAsync("/api/jets");
+        var response = await Client.GetAsync("/api/jets/1");
         response.EnsureSuccessStatusCode();
         var stringResponse = await response.Content.ReadAsStringAsync();
         var model = JsonConvert.DeserializeObject<LookUpDto>(stringResponse);
 
-        model.LookUpValue.Should().Be("Test Lookup");
+        model.LookUpValue.Should().Be("Value 1");
     }
 }
 

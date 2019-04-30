@@ -1,6 +1,5 @@
-﻿using Jets.Dto;
+﻿using Jets.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
 
 namespace WebAPISample.Controllers
 {
@@ -8,10 +7,23 @@ namespace WebAPISample.Controllers
     [ApiController]
     public class JetsController : ControllerBase
     {
-        [HttpGet]
-        public ActionResult<LookUpDto> Get()
+        private IJetsDataAccess _jetsDA;
+
+        public JetsController(IJetsDataAccess jetsDA)
         {
-            return new LookUpDto() { Id = 1, LookUpValue = "Test Lookup" };
+            _jetsDA = jetsDA;
+        }
+
+        [HttpGet]
+        public JsonResult Get()
+        {
+            return new JsonResult(_jetsDA.GetLookUps());
+        }
+
+        [HttpGet("{id}")]
+        public JsonResult GetLookUp(int id)
+        {
+            return new JsonResult(_jetsDA.GetLookUp(id));
         }
     }
 }
