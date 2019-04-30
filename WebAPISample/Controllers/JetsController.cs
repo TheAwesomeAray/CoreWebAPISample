@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace WebAPISample.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/jets")]
     [ApiController]
     public class JetsController : ControllerBase
     {
