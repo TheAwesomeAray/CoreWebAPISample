@@ -15,15 +15,19 @@ namespace WebAPISample.Controllers
         }
 
         [HttpGet]
-        public JsonResult Get()
+        public IActionResult Get()
         {
-            return new JsonResult(_jetsDA.GetLookUps());
+            return Ok(_jetsDA.GetLookUps());
         }
 
         [HttpGet("{id}")]
-        public JsonResult GetLookUp(int id)
+        public IActionResult GetLookUp(int id)
         {
-            return new JsonResult(_jetsDA.GetLookUp(id));
+            var lookUp = _jetsDA.GetLookUp(id);
+            if (lookUp == null)
+                return NotFound();
+
+            return Ok(lookUp);
         }
     }
 }

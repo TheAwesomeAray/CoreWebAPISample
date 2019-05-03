@@ -32,6 +32,16 @@ namespace WebAPISample
         public void ConfigureCommonServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddSwaggerGen(setupAction =>
+            {
+                setupAction.SwaggerDoc("JETSOpenAPISpecification", new Microsoft.OpenApi.Models.OpenApiInfo()
+                {
+                    Title = "JETSApi",
+                    Version = "1"
+                });
+            });
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -48,6 +58,7 @@ namespace WebAPISample
             }
 
             app.UseHttpsRedirection();
+            app.UseSwagger();
             app.UseMvc();
         }
     }

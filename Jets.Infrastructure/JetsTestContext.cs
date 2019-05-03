@@ -17,7 +17,7 @@ namespace Jets.Infrastructure
 
         public LookUpDto GetLookUp(int id)
         {
-            return JetsLookUps.Single(x => x.Id == id);
+            return JetsLookUps.SingleOrDefault(x => x.Id == id);
         }
 
         public IEnumerable<LookUpDto> GetLookUps()
