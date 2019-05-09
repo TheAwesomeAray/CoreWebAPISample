@@ -59,6 +59,12 @@ namespace WebAPISample
 
             app.UseHttpsRedirection();
             app.UseSwagger();
+            app.UseSwaggerUI(setupAction =>
+            {
+                setupAction.SwaggerEndpoint(
+                    "/swagger/JETSOpenAPISpecification/swagger.json", 
+                    "JETS API");
+            });
             app.UseMvc();
         }
     }
